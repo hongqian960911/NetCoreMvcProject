@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MvcExample.Data;
-using MvcExample.Models;
+using NetCoreMvcPeoject.Data;
+using NetCoreMvcPeoject.Models;
 
-namespace MvcExample.Controllers
+namespace NetCoreMvcPeoject.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly MvcExampleContext _context;
+        private readonly NetCoreMvcPeojectContext _context;
 
-        public CustomersController(MvcExampleContext context)
+        public CustomersController(NetCoreMvcPeojectContext context)
         {
             _context = context;
         }

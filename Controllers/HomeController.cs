@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MvcExample.Data;
-using MvcExample.Models;
+using NetCoreMvcPeoject.Data;
+using NetCoreMvcPeoject.Models;
 
-namespace MvcExample.Controllers
+namespace NetCoreMvcPeoject.Controllers
 {
     public class HomeController : Controller
     {

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MvcExample.Models;
+using NetCoreMvcPeoject.Models;
 
-namespace MvcExample.Data
+namespace NetCoreMvcPeoject.Data
 {
-    public class MvcExampleContext : DbContext
+    public class NetCoreMvcPeojectContext : DbContext
     {
-        public MvcExampleContext (DbContextOptions<MvcExampleContext> options)
+        public NetCoreMvcPeojectContext (DbContextOptions<NetCoreMvcPeojectContext> options)
             : base(options)
         {
         }
 
-        public DbSet<MvcExample.Models.Customer> Customer { get; set; }
+        public DbSet<NetCoreMvcPeoject.Models.Customer> Customer { get; set; }
     }
 }

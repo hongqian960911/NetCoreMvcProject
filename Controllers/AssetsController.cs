@@ -2,16 +2,16 @@
 using IC.DataAccess;
 using IC.EntityManager;
 using Microsoft.AspNetCore.Mvc;
-using MvcExample.Data;
+using NetCoreMvcPeoject.Data;
 using System;
 
-namespace MvcExample.Controllers
+namespace NetCoreMvcPeoject.Controllers
 {
     public class AssetsController : Controller
     {
-        private readonly MvcExampleContext _context;
+        private readonly NetCoreMvcPeojectContext _context;
 
-        public AssetsController(MvcExampleContext context)
+        public AssetsController(NetCoreMvcPeojectContext context)
         {
             _context = context;
         }

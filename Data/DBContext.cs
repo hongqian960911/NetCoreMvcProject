@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace MvcExample.Data
+namespace NetCoreMvcPeoject.Data
 {
     public class DBContext
     {

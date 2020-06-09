@@ -1,4 +1,4 @@
-﻿using MvcExample.Data;
+﻿using NetCoreMvcPeoject.Data;
 using MySql.Data.MySqlClient;
 using System;
 

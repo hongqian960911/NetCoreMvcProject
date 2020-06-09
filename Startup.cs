@@ -9,12 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using MvcExample.Data;
+using NetCoreMvcPeoject.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 
-namespace MvcExample
+namespace NetCoreMvcPeoject
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace MvcExample
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<MvcExampleContext>(options =>
+            services.AddDbContext<NetCoreMvcPeojectContext>(options =>
                     options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
         }
 
