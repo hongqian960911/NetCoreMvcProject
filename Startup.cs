@@ -58,7 +58,7 @@ namespace NetCoreMvcPeoject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Customers}/{action=Index}/{id?}");
+                    pattern: "{controller=Assets}/{action=Index}/{id?}");
             });
         }
     }
