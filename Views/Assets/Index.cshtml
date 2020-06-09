@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <style>
+        body {
+            font-family: 'Microsoft YaHei' !important;
+        }
+
+        #customerdt_filter {
+            float: left;
+        }
+
+        div.dt-buttons {
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        button.btn.btn-secondary {
+            margin: 4px;
+        }
+
+        div.dtsp-panesContainer.dropdown-menu {
+            margin-left: -1244px;
+        }
+
+        table.dataTable thead th, table.dataTable thead th, table.dataTable tfoot th {
+            padding: 10px 10px !important;
+        }
+    </style>
+<div class="content-wrapper">
+    <section class="content-header"></section>
+
+    <section class="content">
+        <div class="card">
+            <div class="card-header" onclick="clearModal()">
+                <h3 class="card-title" style="cursor:pointer;" data-toggle="modal" data-target='#modal-lg'>
+                    <i class="fas fa-edit"></i>
+                    添加客户信息
+                </h3>
+            </div>
+            <div class="card-body">
+                <table id="customerdt" class="table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th><input type='checkbox' id='ckAll_head' onchange='ckAllFun("ckAll_head","ckAll_foot")' /></th>
+                            <th>客户名称</th>
+                            <th>是否包含</th>
+                            <th>地址</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th><input type='checkbox' id='ckAll_foot' onchange='ckAllFun("ckAll_foot","ckAll_head")' /></th>
+                            <th>客户名称</th>
+                            <th>是否包含</th>
+                            <th>地址</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        getCustomersList();
+    });
+
+    function getCustomersList() {
+        table = $('#customerdt').DataTable({
+            ajax: {
+                url: "/getCustomersList",
+                type: "get"
+            },
+            deferRender: true,//延迟渲染以提高速度
+            columns: [
+                {
+                    //title: "<input type='checkbox' class='ckAll' onchange='ckAllFun()'/>",
+                    data: "guid",
+                    orderable: false,
+                    render: function (data, type, row) {
+                        var node = '';
+                        node = '<input class="checkchild" name="checkchild" onclick="selectList(this)" value=\"' + row.guid + '\" type="checkbox"/>';
+                        return node;
+                    }
+                },
+                {
+                    //title: "客户名称",
+                    data: "customername", render: function (data, type, row) {
+                        return "<a href='javascript:void(0);' onclick=\"editCustomers('" + row.guid + "')\">" + data + "</a>";
+                    }
+                },
+                {
+                    //title: "是否包含",
+                    data: "isinclude"
+                },
+                {
+                    //title: "地址",
+                    data: "address"
+                }
+            ],
+            language: {
+                processing: "处理中",
+                lengthMenu: "显示 _MENU_ 条数据",
+                zeroRecords: "没有匹配结果",
+                search: "检索:",
+                info: "显示 _START_ 至 _END_ 条数据，总共 _TOTAL_ 条数据，",
+                infoEmpty: "显示 _START_ 至 _END_ 条数据，总共 _TOTAL_ 条数据，",
+                infoFiltered: "(由 _MAX_ 项结果过滤)",
+                loadingRecords: "载入中......",
+                sortAscending: "以升序排列此列",
+                paginate: {
+                    first: "首页",
+                    previous: "上一页",
+                    next: "下一页",
+                    last: "尾页"
+                },
+                select: {
+                    rows: "%d 行选中"
+                },
+                buttons: {
+                    pageLength: {
+                        _: "显示 %d 项"
+                    }
+                }
+            },
+            order: [[1, 'asc']],
+            pageLength: 10,
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "全部"]],
+            dom: '<"top">Bfrt<"bottom"ilp>',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: '导出'
+                },
+                {
+                    text: '删除',
+                    action: function () {
+                        removeCustomers();
+                    }
+                },
+                {
+                    extend: 'colvis'
+                }
+            ]
+        });
+        $('.dataTables_length').css('white-space', 'nowrap')
+        $('.dataTables_length').css('padding-top', '10px')
+        $('.custom-select custom-select-sm form-control form-control-sm').css('padding-top', '0')
+    }
+
+    function ckAllFun(v,m) {
+        var ckAll = $("#" + v + "").prop('checked');
+        $(".checkchild").prop('checked', ckAll);
+        $("#" + m + "").prop('checked', ckAll);
+    }
+
+    function selectList() {
+        var sel = $(".checkchild:checked").length;
+        var all = $('#customerdt tbody tr').length;
+        if (sel == all)
+            $("#ckAll_head").prop('checked', true);
+        else
+            $("#ckAll_head").prop('checked', false);
+        $("#ckAll_foot").prop('checked', $("#ckAll_head").prop('checked'));
+    }
+</script>
+
